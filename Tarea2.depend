@@ -1,0 +1,73 @@
+# depslib dependency file v1.0
+1588608931 source:d:\tercer semestre\estructura de datos\tarea2(benjarojas)\tarea2delbenja\map.c
+	"Map.h"
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stdio.h>
+
+1588870403 d:\tercer semestre\estructura de datos\tarea2(benjarojas)\tarea2delbenja\map.h
+
+1589199792 source:d:\tercer semestre\estructura de datos\tarea2(benjarojas)\tarea2delbenja\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<math.h>
+	<ctype.h>
+	<string.h>
+	<stdbool.h>
+	<assert.h>
+	"list.h"
+	"Map.h"
+	"Funciones.c"
+	"probandofunciones.c"
+
+1575514896 source:d:\tercer semestre\estructura de datos\tarea2(benjarojas)\tarea2delbenja\queue.c
+	"queue.h"
+	<stdlib.h>
+	<assert.h>
+
+1575514896 d:\tercer semestre\estructura de datos\tarea2(benjarojas)\tarea2delbenja\queue.h
+
+1589199791 d:\tercer semestre\estructura de datos\tarea2(benjarojas)\tarea2delbenja\funciones.c
+
+1587340491 source:d:\tercer semestre\estructura de datos\tarea2(benjarojas)\tarea2delbenja\list.c
+	"list.h"
+	<stdlib.h>
+	<assert.h>
+
+1586876095 d:\tercer semestre\estructura de datos\tarea2(benjarojas)\tarea2delbenja\list.h
+
+1589196322 d:\tercer semestre\estructura de datos\tarea2(benjarojas)\tarea2delbenja\probandofunciones.c
+
+1587340491 source:c:\users\benjamín\desktop\tarea2\list.c
+	"list.h"
+	<stdlib.h>
+	<assert.h>
+
+1586876095 c:\users\benjamín\desktop\tarea2\list.h
+
+1588608931 source:c:\users\benjamín\desktop\tarea2\map.c
+	"Map.h"
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stdio.h>
+
+1588870403 c:\users\benjamín\desktop\tarea2\map.h
+
+1589467377 source:c:\users\benjamín\desktop\tarea2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<math.h>
+	<ctype.h>
+	<string.h>
+	<stdbool.h>
+	<assert.h>
+	"list.h"
+	"Map.h"
+	"Funciones.c"
+
+1589467427 c:\users\benjamín\desktop\tarea2\funciones.c
+
