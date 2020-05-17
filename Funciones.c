@@ -7,6 +7,7 @@ char * _strdup (const char *s) {
 
 	return (char *) memcpy (new, s, len);
 }
+
 const char* get_csv_field (char * tmp, int i) {
     //se crea una copia del string tmp
     char * line = _strdup (tmp);
@@ -42,8 +43,47 @@ struct carrito{
     list* carro;
     char nombre[500];
 };
+
+
+void addObject2(producto* objeto,Map * mapa_tipo_lista, Map * mapa_marca_lista){
+
+    printf("1\n");
+
+    list* lista_tipo = NULL;
+    lista_tipo = searchMapCarrito(mapa_tipo_lista,objeto->tipo);
+    if(lista_tipo == NULL)
+    {
+        lista_tipo = list_create_empty();
+        lista_tipo = list_create((list_release_object_callback) lista_tipo);
+        list_push_back(lista_tipo,objeto);
+        insertMap(mapa_tipo_lista,objeto->tipo,lista_tipo);
+    }
+    else
+    {
+// Editar esto
+        list_push_back(lista_tipo,objeto);
+    }
+//***********************************
+    list* lista_marca = NULL;
+    lista_marca = searchMapCarrito(mapa_marca_lista,objeto->marca);
+    if(lista_marca == NULL)
+    {
+        lista_marca = list_create_empty();
+        lista_marca =list_create((list_release_object_callback) lista_marca);
+        list_push_back(lista_marca,objeto);
+        insertMap(mapa_marca_lista, objeto->marca, lista_marca);
+    }
+    else
+    {
+// Editar esto
+            list_push_back(lista_marca,objeto);
+    }
+
+    printf("3\n");
+}
+
 // editar esta funcion*****************************
-void agregarProductoNuevo(Map* mapa_nombre,Map * mapa_marca, Map * mapa_tipo){
+void agregarProductoNuevo(Map* mapa_nombre,Map * mapa_marca, Map * mapa_tipo, Map * mapa_marca_lista, Map * mapa_tipo_lista ){
     char nombre[500];
     producto* verificador = NULL;
     printf("Ingrese Nombre\n");
@@ -78,6 +118,8 @@ void agregarProductoNuevo(Map* mapa_nombre,Map * mapa_marca, Map * mapa_tipo){
     strcpy(verificador->tipo,tipo);
     strcpy(verificador->nombre,nombre);
 //    insertMap()
+    addObject2(verificador,mapa_tipo_lista, mapa_marca_lista);
+
     insertMap(mapa_tipo,tipo, verificador);
     insertMap(mapa_nombre,nombre, verificador);
     insertMap(mapa_marca,marca, verificador);
@@ -225,14 +267,6 @@ void concretarCompra(const char* nombre_carrito, Map* carritos, FILE * salida){
     while(objeto_actual != NULL){
         printf("Nombre:%s \nMarca:%s \nTipo:%s \nStock:%d \nPrecio:%d\n\n", objeto_actual ->objeto->nombre,objeto_actual -> objeto->marca,objeto_actual -> objeto->tipo,objeto_actual ->objeto->stock,objeto_actual ->objeto->precio);
 
-        fprintf(salida,objeto_actual ->objeto->nombre);
-        fprintf(salida,",");
-        fprintf(salida,objeto_actual ->objeto->marca);
-        fprintf(salida,",");
-        fprintf(salida,(const char *) objeto_actual ->objeto->precio);
-        fprintf(salida,",");
-        fprintf(salida,objeto_actual ->objeto->tipo);
-        fprintf(salida,"\n");
         precio_final += objeto_actual -> objeto-> precio * objeto_actual ->cantidad;
         objeto_actual ->objeto ->stock = objeto_actual ->objeto ->stock - objeto_actual ->cantidad;
         free(objeto_actual);
@@ -244,14 +278,8 @@ void concretarCompra(const char* nombre_carrito, Map* carritos, FILE * salida){
 
 }
 
-void ingresoPorArchivo (producto* objeto, char palabra[], Map* mapa_nombre,Map* mapa_marca,Map* mapa_tipo, Map * mapa_tipo_lista, Map * mapa_marca_lista){
-    strcpy(objeto ->nombre, get_csv_field(palabra,1));
-    strcpy(objeto ->marca, get_csv_field(palabra,2));
-    strcpy(objeto ->tipo, get_csv_field(palabra,3));
-    objeto -> stock = atoi(get_csv_field(palabra,4));
-    objeto -> precio = atoi(get_csv_field(palabra,5));
+void addObject(producto* objeto,Map * mapa_tipo_lista, Map * mapa_marca_lista ){
 
-//******************************
     list* lista_tipo = NULL;
     lista_tipo = searchMapCarrito(mapa_tipo_lista,objeto->tipo);
     if(lista_tipo == NULL)
@@ -279,6 +307,17 @@ void ingresoPorArchivo (producto* objeto, char palabra[], Map* mapa_nombre,Map* 
     {
         list_push_back(lista_marca,objeto);
     }
+
+}
+
+void ingresoPorArchivo(producto* objeto, char palabra[], Map* mapa_nombre,Map* mapa_marca,Map* mapa_tipo, Map * mapa_tipo_lista, Map * mapa_marca_lista){
+    strcpy(objeto ->nombre, get_csv_field(palabra,1));
+    strcpy(objeto ->marca, get_csv_field(palabra,2));
+    strcpy(objeto ->tipo, get_csv_field(palabra,3));
+    objeto -> stock = atoi(get_csv_field(palabra,4));
+    objeto -> precio = atoi(get_csv_field(palabra,5));
+
+    addObject(objeto, mapa_tipo_lista,mapa_marca_lista );
 
     insertMap(mapa_nombre , objeto ->nombre , objeto);
     insertMap(mapa_marca,objeto ->marca , objeto);

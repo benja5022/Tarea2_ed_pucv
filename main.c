@@ -9,6 +9,8 @@
 #include "list.h"
 #include "Map.h"
 #include "Funciones.c"
+#include "probandofunciones.c"
+
 int main()
 {
     int validacion = 0;
@@ -74,7 +76,7 @@ int main()
             printf("opcion = %d\n", opcion);
         }
 
-        if (opcion == 1) agregarProductoNuevo(mapa_nombre,mapa_marca,mapa_tipo); // editar esta funcion
+        if (opcion == 1) agregarProductoNuevo(mapa_nombre,mapa_marca,mapa_tipo,mapa_marca_lista,mapa_tipo_lista); // editar esta funcion
         if (opcion == 2){
             printf("Ingrese el nombre del producto\n");
             getchar();
